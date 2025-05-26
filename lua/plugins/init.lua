@@ -137,5 +137,22 @@ return {
             end
         })
     end
+  },
+
+  -- Spectre search and repalce plugin
+  {
+    "nvim-pack/nvim-spectre",
+    dependencies = {"nvim-lua/plenary.nvim"},
+    config = function()
+      require("spectre").setup({
+        live_update = true
+      })
+    end
+  },
+
+  -- Multicursors Plugin
+  {
+    "mg979/vim-visual-multi",
+    lazy = false,
   }
 }

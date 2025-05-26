@@ -53,3 +53,8 @@ map('n', '<leader>fg', builtin.live_grep, {})
 -- Diagnostic movement
 map("n", "gn", diagnostic.goto_next)
 map("n", "gb", diagnostic.goto_prev)
+
+-- Spectre
+map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre",
+})
