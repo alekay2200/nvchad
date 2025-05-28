@@ -11,6 +11,11 @@ map("n", "<C-l>", "<C-w>l", { noremap = false, silent = true })
 map("v", '<S-k>', ':move \'<-2<CR>gv-gv', { noremap = true, silent = true })
 map("v", '<S-j>', ':move \'>+1<CR>gv-gv', { noremap = true, silent = true })
 
+-- Indentation
+-- After indent lines, keeps in visual mode with the same lines selected
+map('v', '>', '>gv', { noremap = true, silent = true })
+map('v', '<', '<gv', { noremap = true, silent = true })
+
 -- File explorer
 map("n", "<leader>dd", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
