@@ -41,7 +41,7 @@ map("n", "D", lsp.buf.hover, {})
 map("n", "gd", lsp.buf.definition, {})
 -- go to implementations
 map("n", "gi", lsp.buf.implementation, {})
--- go to references 
+-- go to references
 map("n", "gr", lsp.buf.references, {})
 -- go back to previous file after jumping with one of this functions
 map("n", "gbb", "<C-t>", { noremap = true, silent = true })
@@ -62,4 +62,9 @@ map("n", "gb", diagnostic.goto_prev)
 -- Spectre
 map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre",
+})
+
+-- Neotest
+map('n', '<leader>tr', '<cmd>lua require("neotest").run.run()<CR>', {
+    desc = "Run single test",
 })
