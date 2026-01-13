@@ -46,8 +46,7 @@ return {
               sorter = "case_sensitive",
           },
           view = {
-              -- width = 60,
-              -- width = vim.api.nvim_get_option("columns"),
+              width = vim.o.columns,
               side = 'left',
           },
           renderer = {
@@ -98,7 +97,7 @@ return {
     dependencies = {
         'yorickpeterse/nvim-pqf'
     },
-    lazy = true,
+    lazy = false,
     version = "*",
     config = function()
         require('pqf').setup()
@@ -182,5 +181,23 @@ return {
         }),
       })
     end
+  },
+
+  -- Markdown Preview
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
+
+  {
+    "vinnymeller/swagger-preview.nvim",
+    cmd = { "SwaggerPreview", "SwaggerPreviewStop", "SwaggerPreviewToggle" },
+    build = "npm i",
+    config = true,
   }
 }
