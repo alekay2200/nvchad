@@ -4,8 +4,7 @@ require("nvim-tree").setup({
         sorter = "case_sensitive",
     },
     view = {
-        -- width = 60,
-        -- width = vim.api.nvim_get_option("columns"),
+        width = vim.o.columns,
         side = 'left',
     },
     renderer = {
