@@ -5,6 +5,7 @@ local bo = vim.bo
 local opt = vim.opt
 local cmd = vim.cmd
 local fn = vim.fn
+local keymap = vim.keymap
 
 -- Buffer Custom commands
 -- Next buffer
@@ -115,3 +116,31 @@ local function align(opts)
 end
 
 api.nvim_create_user_command("Align", align, { nargs = 1, range = true })
+
+-- Go doc mapping for Go files (KK to show documentation in new buffer)
+api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.keymap.set("n", "KK", function()
+      local func_path = fn.expand("<cWORD>")
+      -- Remove '()' from the function: example -> strings.Split(test) -> strings.Split
+      func_path = func_path:match("([%a%d%._]+)")
+      if func_path == "" then
+        return
+      end
+
+      local buf = api.nvim_create_buf(true, false)
+      api.nvim_set_current_buf(buf)
+
+      local output = fn.systemlist("go doc " .. func_path)
+
+      api.nvim_buf_set_lines(buf, 0, -1, false, output)
+      api.nvim_buf_set_option(buf, "buftype", "nofile")
+      api.nvim_buf_set_option(buf, "filetype", "godoc")
+      api.nvim_buf_set_name(buf, "GoDoc: " .. func_path)
+
+      keymap.set("n", "q", ":bd!<CR>", { buffer = buf, silent = true })
+
+    end, { buffer = true, desc = "Show go doc for word under cursor" })
+  end,
+})
