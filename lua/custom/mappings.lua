@@ -2,12 +2,18 @@ local builtin = require("telescope.builtin")
 local map = vim.keymap.set
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
+local funcs = require("funcs")
 
 -- Movement
 map("n", "<C-h>", "<C-w>h", { noremap = false, silent = true })
 map("n", "<C-j>", "<C-w>j", { noremap = false, silent = true })
 map("n", "<C-k>", "<C-w>k", { noremap = false, silent = true })
 map("n", "<C-l>", "<C-w>l", { noremap = false, silent = true })
+map("t", "<C-h>", "<C-\\><C-n><C-w>h", { noremap = false, silent = true })
+map("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = false, silent = true })
+map("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = false, silent = true })
+map("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = false, silent = true })
+map("t", "<S-Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 map("v", '<S-k>', ':move \'<-2<CR>gv-gv', { noremap = true, silent = true })
 map("v", '<S-j>', ':move \'>+1<CR>gv-gv', { noremap = true, silent = true })
 
@@ -67,4 +73,9 @@ map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
 -- Neotest
 map('n', '<leader>tr', '<cmd>lua require("neotest").run.run()<CR>', {
     desc = "Run single test",
+})
+
+-- Claude Code
+map('n', '<leader>cc', funcs.OpenClaudeCodeTerminal, {
+    desc = "Open in split view a new window with claude code",
 })
